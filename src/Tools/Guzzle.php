@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Tools;
+namespace ConstructPay\Api\Tools;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -11,8 +11,8 @@ use GuzzleHttp\HandlerStack;
 use Hyperf\Codec\Json;
 use Hyperf\Guzzle\CoroutineHandler;
 use Psr\Http\Message\ResponseInterface;
-use UnionPay\Api\Constants\UnionErrorCode;
-use UnionPay\Api\Exception\PayException;
+use ConstructPay\Api\Constants\ConstructErrorCode;
+use ConstructPay\Api\Exception\PayException;
 
 class Guzzle
 {
@@ -56,7 +56,7 @@ class Guzzle
      */
     public function sendPost(string $url, array $params): array
     {
-        logger('unionpay')->info('UnionPay POST', ['url' => $url, 'params' => $params]);
+        logger('unionpay')->info('ConstructPay POST', ['url' => $url, 'params' => $params]);
 
         $result = $this->client->post($url, ['json' => $params]);
 
@@ -71,12 +71,12 @@ class Guzzle
     {
         $result = $response->getBody()->getContents();
 
-        logger('unionpay')->info('UnionPay RESULT', Json::decode($result));
+        logger('unionpay')->info('ConstructPay RESULT', Json::decode($result));
 
         $result = Json::decode($result);
 
         if (!is_array($result)) {
-            throw new PayException(UnionErrorCode::SERVER_ERROR, 'UnionPay response error');
+            throw new PayException(ConstructErrorCode::SERVER_ERROR, 'ConstructPay response error');
         }
 
         return $result;

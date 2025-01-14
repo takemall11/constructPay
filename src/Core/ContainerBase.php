@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace UnionPay\Api\Core;
+namespace ConstructPay\Api\Core;
 
 /**
  * Class ContainerBase.

@@ -8,7 +8,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use UnionPay\Api\UnionPay;
+use ConstructPay\Api\ConstructPay;
 
 date_default_timezone_set('PRC');
 
@@ -43,7 +43,7 @@ $param = [
     "subOpenId"=>"oLLD10OE0bZiUE_UUola5ecJPDLI",
 ];
 
-$payClient = new UnionPay(['mid' => $mchId]);
+$payClient = new ConstructPay(['mid' => $mchId]);
 ## 初始化配置
 $payClient->setAppId($appId);
 $payClient->setAppKey($appSecret);

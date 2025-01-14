@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Provider;
+namespace ConstructPay\Api\Provider;
 
-use UnionPay\Api\Core\Container;
-use UnionPay\Api\Functions\Public\OrderDetail;
-use UnionPay\Api\Functions\Public\OrderRefund;
-use UnionPay\Api\Interfaces\Provider;
+use ConstructPay\Api\Core\Container;
+use ConstructPay\Api\Functions\Public\OrderDetail;
+use ConstructPay\Api\Functions\Public\OrderRefund;
+use ConstructPay\Api\Interfaces\Provider;
 
 /**
- * Class UnionPayProvider
- * @package UnionPay\Api\Provider
+ * Class ConstructPayProvider
+ * @package ConstructPay\Api\Provider
  */
 class SearchProvider implements Provider
 {

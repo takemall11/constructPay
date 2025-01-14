@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Tools;
+namespace ConstructPay\Api\Tools;
 
 use Hyperf\Codec\Json;
 

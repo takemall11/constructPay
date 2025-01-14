@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Interfaces;
+namespace ConstructPay\Api\Interfaces;
 
-use UnionPay\Api\Core\Container;
+use ConstructPay\Api\Core\Container;
 
 /**
  * Interface Provider

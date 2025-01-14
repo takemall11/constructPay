@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Core;
+namespace ConstructPay\Api\Core;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
-use UnionPay\Api\Constants\UnionErrorCode;
-use UnionPay\Api\Exception\PayException;
-use UnionPay\Api\Tools\Guzzle;
-use UnionPay\Api\Tools\Sign;
+use ConstructPay\Api\Constants\ConstructErrorCode;
+use ConstructPay\Api\Exception\PayException;
+use ConstructPay\Api\Tools\Guzzle;
+use ConstructPay\Api\Tools\Sign;
 
 use function Hyperf\Support\make;
 use function Hyperf\Config\config;
 
 /**
  * Class BaseClient
- * @package UnionPay\Api\Core
+ * @package ConstructPay\Api\Core
  * @property BaseClient app
  */
 abstract class BaseClient
@@ -73,12 +73,12 @@ abstract class BaseClient
             return $client->$method($this->url . $this->service, $data);
         } catch (RequestException|ClientException $e) {
             // 请求失败
-            logger('unionpay')->error('UnionPay Request Error', [
+            logger('unionpay')->error('ConstructPay Request Error', [
                 'url' => $this->host . $this->url . $this->service,
                 'data' => $data,
                 'error' => $e->getMessage(),
             ]);
-            throw new PayException(UnionErrorCode::SERVER_ERROR, '支付服务访问失败');
+            throw new PayException(ConstructErrorCode::SERVER_ERROR, '支付服务访问失败');
         }
     }
 

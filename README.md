@@ -3,13 +3,13 @@
 ## Installing
 
 ```shell
-$ composer require nahuomall/unionpay -vvv
+$ composer require nahuomall/constructPay -vvv
 ```
 
 ## Usage
 
 ```php
-        $obj = \Hyperf\Support\make(\UnionPay\Api\Wechat::class)
+        $obj = \Hyperf\Support\make(\ConstructPay\Api\Wechat::class)
         
         $obj->setMchId('你的商户ID');
         // app

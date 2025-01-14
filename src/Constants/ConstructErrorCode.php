@@ -10,13 +10,13 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace UnionPay\Api\Constants;
+namespace ConstructPay\Api\Constants;
 
 use Hyperf\Constants\AbstractConstants;
 use Hyperf\Constants\Annotation\Constants;
 
 #[Constants]
-class UnionErrorCode extends AbstractConstants
+class ConstructErrorCode extends AbstractConstants
 {
     public const SERVER_ERROR = 500;
 

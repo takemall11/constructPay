@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Core;
+namespace ConstructPay\Api\Core;
 
 /**
  * Class Container
- * @package UnionPay\Api\Core
+ * @package ConstructPay\Api\Core
  */
 class Container implements \ArrayAccess
 {

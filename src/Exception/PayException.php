@@ -10,9 +10,9 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace UnionPay\Api\Exception;
+namespace ConstructPay\Api\Exception;
 
-use UnionPay\Api\Constants\UnionErrorCode;
+use ConstructPay\Api\Constants\ConstructErrorCode;
 use Hyperf\Server\Exception\ServerException;
 use Throwable;
 
@@ -21,7 +21,7 @@ class PayException extends ServerException
     public function __construct(int $code = 0, string $message = null, Throwable $previous = null)
     {
         if (is_null($message)) {
-            $message = UnionErrorCode::getMessage($code);
+            $message = ConstructErrorCode::getMessage($code);
         }
 
         parent::__construct($message, $code, $previous);

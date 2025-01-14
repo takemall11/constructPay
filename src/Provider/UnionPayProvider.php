@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Provider;
+namespace ConstructPay\Api\Provider;
 
-use UnionPay\Api\Core\Container;
-use UnionPay\Api\Functions\Union\CloudMiniPayShortcut;
-use UnionPay\Api\Functions\Union\MiniPayShortcut;
-use UnionPay\Api\Interfaces\Provider;
+use ConstructPay\Api\Core\Container;
+use ConstructPay\Api\Functions\Union\CloudMiniPayShortcut;
+use ConstructPay\Api\Functions\Union\MiniPayShortcut;
+use ConstructPay\Api\Interfaces\Provider;
 
 /**
- * Class UnionPayProvider
- * @package UnionPay\Api\Provider
+ * Class ConstructPayProvider
+ * @package ConstructPay\Api\Provider
  */
-class UnionPayProvider implements Provider
+class ConstructPayProvider implements Provider
 {
     /**
      * 服务提供者

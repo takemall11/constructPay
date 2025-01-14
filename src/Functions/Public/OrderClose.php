@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Functions\Public;
+namespace ConstructPay\Api\Functions\Public;
 
 use GuzzleHttp\Exception\GuzzleException;
-use UnionPay\Api\Core\BaseClient;
+use ConstructPay\Api\Core\BaseClient;
 
 /**
  * 关闭模块

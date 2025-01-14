@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace UnionPay\Api\Functions\Union;
+namespace ConstructPay\Api\Functions\Union;
 
 use GuzzleHttp\Exception\GuzzleException;
-use UnionPay\Api\Core\BaseClient;
+use ConstructPay\Api\Core\BaseClient;
 
 /**
  * 订单模块

@@ -1,5 +1,5 @@
 {
-  "name": "nahuomall/unionpay",
+  "name": "nahuomall/constructPay",
   "description": "Union Pay API SDK for PHP",
   "type": "library",
   "keywords": ["union", "sdk", "hyperf"],
@@ -17,7 +17,7 @@
   },
   "support": {
     "email": "yangyang@nahuomall.com",
-    "issues": "https://github.com/nahuoMall/mideaPay",
+    "issues": "https://github.com/nahuoMall/constructPay",
     "docs": "https://open.jxhh.com"
   },
   "require-dev": {
@@ -29,7 +29,7 @@
     "swoole/ide-helper": "^5.0"
   },
   "provides": [
-    "UnionPay\\Api\\Provider\\UnionPayServiceProvider"
+    "ConstructPay\\Api\\Provider\\ConstructPayServiceProvider"
   ],
   "license": "Apache-2.0",
   "authors": [
@@ -41,7 +41,7 @@
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "UnionPay\\Api\\": "src/"
+      "ConstructPay\\Api\\": "src/"
     }
   },
   "scripts": {
@@ -52,7 +52,7 @@
       "dev-master": "1.0-dev"
     },
     "hyperf": {
-      "config": "UnionPay\\Api\\ConfigProvider"
+      "config": "ConstructPay\\Api\\ConfigProvider"
     }
   }
 }
