@@ -26,24 +26,22 @@ abstract class BaseClient
 
     // 基础参数
     protected Container $app;
-    // 请求地址
-    public string $host = 'https://api-mop.chinaums.com';
+
     // 请求路径
-    public string $url = '/v1/netpay';
-    // 服务名称
-    public string $service;
+    public string $url = '';
 
     /**
      * BaseClient constructor.
      * @param Container $app
      * @param string $service
      */
-    public function __construct(Container $app, string $service)
+    public function __construct(Container $app)
     {
         $this->app = $app;
-        $this->service = $service;
+        //设置时区
+        date_default_timezone_set('Asia/Shanghai');
         // 设置公共参数
-        $app->baseParams['msgId'] = uniqid();
+        $this->app->baseParams['head']['timestamp'] =  date('YmdHis', time());
     }
 
     /**
@@ -59,22 +57,31 @@ abstract class BaseClient
      * @return array
      * @throws GuzzleException
      */
-    public function curlRequest(array $data, string $method = 'get'): array
+    public function curlRequest(array $param, string $method = 'get'): array
     {
         try {
             $this->setParams();
+            $data['data'] = $param;
             ## 合并公共参数
             $data = array_merge($data, $this->app->baseParams);
+            //请求头参数
+            $reqData = $this->getReqData($data, 'SM4');
+            $sign = $this->getSign($reqData, $data['head']['timestamp'], 'SM3');
+            $headers = [
+                'mrchCode' => $this->app->mrchCode,
+                'reqData' => $reqData,
+                'sign' => $sign
+            ];
             ## 开始请求
-            $client = $this->getInstance(['Authorization' => $this->getSign($data), 'Content-Length' => strlen(json_encode($data, JSON_UNESCAPED_UNICODE))]);
+            $client = $this->getInstance($headers);
             ## 发送请求
             $method = 'send' . ucfirst($method);
             ## 获取返回结果
-            return $client->$method($this->url . $this->service, $data);
+            return $client->$method($this->app->url, ['reqData' => $data]);
         } catch (RequestException|ClientException $e) {
             // 请求失败
             logger('unionpay')->error('ConstructPay Request Error', [
-                'url' => $this->host . $this->url . $this->service,
+                'url' => $this->app->host . $this->app->url,
                 'data' => $data,
                 'error' => $e->getMessage(),
             ]);
@@ -91,12 +98,12 @@ abstract class BaseClient
     private function getInstance(array $headers = [], int $timeout = 10): Guzzle
     {
         $params = [
-            'base_uri' => $this->host,
+            'base_uri' => $this->app->host,
             'timeout' => $timeout,
             'verify' => false,
             'headers' => $headers,
         ];
-
+        //   var_dump($params);exit;
         ## 开始请求
         /** @var Guzzle $client */
         return make(Guzzle::class)->setHttpHandle($params);

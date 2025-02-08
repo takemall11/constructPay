@@ -12,12 +12,9 @@ use ConstructPay\Api\Core\BaseClient;
  */
 class OrderRefund extends BaseClient
 {
-    public string $service = 'refund';
-
-
     protected function setParams(): void
     {
-        $this->app->baseParams['instMid'] = "MINIDEFAULT";
+        $this->app->baseParams['head']['bizCode'] = "A0002";
     }
 
     /**

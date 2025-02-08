@@ -2,35 +2,30 @@
 
 declare(strict_types=1);
 
-namespace ConstructPay\Api\Functions\Union;
+namespace ConstructPay\Api\Functions\Public;
 
 use GuzzleHttp\Exception\GuzzleException;
 use ConstructPay\Api\Core\BaseClient;
 
 /**
- * 订单模块
+ * 退款模块
  */
-class CloudMiniPayShortcut extends BaseClient
+class JumpThirdAppSignature extends BaseClient
 {
-    /**
-     * @return void
-     */
     protected function setParams(): void
     {
-        $this->app->baseParams['tradeType'] = "UP_WX_MINI";
-        $this->app->baseParams['instMid'] = "MINIDEFAULT";
+        $this->app->baseParams['head']['bizCode'] = "A1001";
     }
 
     /**
-     * 创建订单
+     * 3.10建行生活app跳转三方app链接签名接口
      * @param array $params
      * @return array
      * @throws GuzzleException
      */
-    public function createOrder(array $params): array
+    public function getJumpThirdAppSignature(array $params): array
     {
+        $this->setParams();
         return $this->curlRequest($params, 'post');
     }
-
-
 }

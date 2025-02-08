@@ -26,8 +26,33 @@ class ContainerBase extends Container
     public string $service = '';
 
     public array $baseParams = [];
+    /** 国密SM3key
+     */
+    public string $secretSM3;
+
+
+    /** 国密SM4key
+     */
+    public string $secretSM4;
+
+    public string $mrchCode;
+    public string $shopCode;
+
+    /**SM4加密类型 加密类型 ctr | ofb| cfb |cbc| ecb
+     * @var string
+     */
+    public string $encryptionTypeSM4 = 'ecb';
+
+
+    // 请求地址
+    public string $host = 'https://aty.huamaihome.com';
+    //请求路由
+    public string $url = '/ccb_equity_api_new/gateway/bizProcessApi';
+
 
     protected array $provider = [];
+
+
 
     /**
      * ContainerBase constructor.
@@ -80,4 +105,67 @@ class ContainerBase extends Container
         $this->appKey = $appKey;
         return $this;
     }
+
+    /**
+     * @return ContainerBase
+     */
+    public function setSecretSM3(string $smThreeSecret): static
+    {
+        $this->secretSM3 = $smThreeSecret;
+        return $this;
+    }
+    /**
+     * @return ContainerBase
+     */
+    public function setSecretSM4(string $secretSM4): static
+    {
+        $this->secretSM4 = $secretSM4;
+        return $this;
+    }
+
+    /**
+     * @return ContainerBase
+     */
+    public function setMrchCode(string $mrchCode): static
+    {
+        $this->mrchCode = $mrchCode;
+        return $this;
+    }
+    /**
+     * @return ContainerBase
+     */
+    public function setShopCode(string $shopCode): static
+    {
+        $this->shopCode = $shopCode;
+        return $this;
+    }
+
+    /**设置SM4加密类型
+     * @return ContainerBase
+     */
+    public function setEncryptionTypeSM4(string $encryptionTypeSM4): static
+    {
+        $this->encryptionTypeSM4 = $encryptionTypeSM4;
+        return $this;
+    }
+
+
+    /**设置请求域名
+     * @return ContainerBase
+     */
+    public function setHost(string $host): static
+    {
+        $this->host = $host;
+        return $this;
+    }
+
+    /**设置请求url
+     * @return ContainerBase
+     */
+    public function setUrl(string $url): static
+    {
+        $this->$url = $url;
+        return $this;
+    }
+
 }

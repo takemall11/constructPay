@@ -6,32 +6,26 @@ namespace ConstructPay\Api\Functions\Public;
 
 use GuzzleHttp\Exception\GuzzleException;
 use ConstructPay\Api\Core\BaseClient;
-use ConstructPay\Api\Core\Container;
 
 /**
- * 订单模块
+ * 退款模块
  */
-class OrderDetail extends BaseClient
+class JumpBankAppSignature extends BaseClient
 {
     protected function setParams(): void
     {
-        $this->app->baseParams['head']['bizCode'] = "A0003";
+        $this->app->baseParams['head']['bizCode'] = "A1000";
     }
 
     /**
-     * 统一查询订单
+     * 3.9三方app跳转建行生活app链接签名接口
      * @param array $params
      * @return array
      * @throws GuzzleException
      */
-    public function getInfo(array $params): array
+    public function getJumpBankAppSignature(array $params): array
     {
-        return $this->curlRequest($params, 'post');
-    }
-
-    //对账单查询
-    public function billReconciliation(array $params): array
-    {
+        $this->setParams();
         return $this->curlRequest($params, 'post');
     }
 }

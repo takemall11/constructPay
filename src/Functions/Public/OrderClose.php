@@ -12,11 +12,9 @@ use ConstructPay\Api\Core\BaseClient;
  */
 class OrderClose extends BaseClient
 {
-    public string $service = 'close';
-
     protected function setParams(): void
     {
-        // ......
+        $this->app->baseParams['head']['bizCode'] = "A0005";
     }
 
     /**

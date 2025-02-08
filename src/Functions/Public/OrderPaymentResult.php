@@ -9,13 +9,13 @@ use ConstructPay\Api\Core\BaseClient;
 use ConstructPay\Api\Core\Container;
 
 /**
- * 订单模块
+ * 订单模块 建行推送商户订单支付结果接口
  */
-class OrderDetail extends BaseClient
+class OrderPaymentResult extends BaseClient
 {
     protected function setParams(): void
     {
-        $this->app->baseParams['head']['bizCode'] = "A0003";
+        $this->app->baseParams['head']['bizCode'] = "A0004";
     }
 
     /**
@@ -24,14 +24,9 @@ class OrderDetail extends BaseClient
      * @return array
      * @throws GuzzleException
      */
-    public function getInfo(array $params): array
+    public function getPaymentResult(array $params): array
     {
         return $this->curlRequest($params, 'post');
     }
 
-    //对账单查询
-    public function billReconciliation(array $params): array
-    {
-        return $this->curlRequest($params, 'post');
-    }
 }

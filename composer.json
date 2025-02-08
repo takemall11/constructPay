@@ -1,5 +1,5 @@
 {
-  "name": "nahuomall/constructPay",
+  "name": "nahuomall/construct-pay",
   "description": "Union Pay API SDK for PHP",
   "type": "library",
   "keywords": ["union", "sdk", "hyperf"],
@@ -13,7 +13,9 @@
     "ext-simplexml": "*",
     "spatie/array-to-xml": "^3.2",
     "mtownsend/xml-to-array": "^2.0",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "lizhichao/one-sm": "^1.10",
+    "hyperf/logger": "~3.1.0"
   },
   "support": {
     "email": "yangyang@nahuomall.com",
