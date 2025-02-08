@@ -27,17 +27,14 @@ $payClient->setMrchCode('SY5019');
 $payClient->setShopCode('SY5019100');
 $payClient->setSecretSM3('b1fddca5a6394f17ac48527bc5c718c2');
 $payClient->setSecretSM4('r48527fc7c718c28');
-$payClient->setEncryptionTypeSM4('ecb');
-$payClient->setHost('https://aty.huamaihome.com');
-$payClient->setUrl('/ccb_equity_api_new/gateway/bizProcessApi');
 
 // 下单接口
 $param =
-//    "head" => [
-//        'bizCode' => "A0001",
-//        'timestamp' => "20240718012310",
+    [
+//        "head" => [
+//            'bizCode' => "A0001",
+//            'timestamp' => "20240718012310",
 //    ],
-     array(
         "mrchCode" => "SY5019",
         "shopCode" => "SY5019100",
         "payResultNoticeUrl" => "https://pay-test.nahuomall.com/notify/unionNotify",
@@ -45,18 +42,17 @@ $param =
         "buyerMobile" => "13112255249",
         "shopOriginalPrice" => 100,
         "addCode" => "100010",
-        "address" => "江苏省南京市",
-        "goodsList" => array(
-            array(
+        "address" => "beijing",
+        "goodsList" => [
+            [
                 "goodsOrderNumber" => "22234445564545646",
                 "goodsCode" => "oLLD10OE0bZiUE_UUola5ecJPDLI",
                 "goodsName" => "llllll",
                 "shopGoodsOriginalPrice" => 11,
                 "goodsCount" => 1
-            )
-        )
-    )
-;
+            ]
+        ]
+    ];
 
 // 下单
 $response = $payClient->wechatMini->createOrder($param);
@@ -194,14 +190,14 @@ $param = [
 //3.10建行生活app跳转三方app链接签名接口
 $param = [
 
-        'mrchCode' => "SY5001", //商户code
-        /**
-         * 三方app手机系统渠道：示例：
-         * 苏宁app跳转建行生活app
-         * iOS：https://m.suning.com；
-         * 安卓：suning://m.suning.com/indexy
-         */
-        'appInfo' => "SY5001",
+    'mrchCode' => "SY5001", //商户code
+    /**
+     * 三方app手机系统渠道：示例：
+     * 苏宁app跳转建行生活app
+     * iOS：https://m.suning.com；
+     * 安卓：suning://m.suning.com/indexy
+     */
+    'appInfo' => "SY5001",
 ];
 
 $response = $payClient->jumpThirdAppSignature->getJumpThirdAppSignature($param);

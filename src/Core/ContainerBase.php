@@ -43,12 +43,10 @@ class ContainerBase extends Container
      */
     public string $encryptionTypeSM4 = 'ecb';
 
-
     // 请求地址
     public string $host = 'https://aty.huamaihome.com';
     //请求路由
     public string $url = '/ccb_equity_api_new/gateway/bizProcessApi';
-
 
     protected array $provider = [];
 
@@ -137,34 +135,6 @@ class ContainerBase extends Container
     public function setShopCode(string $shopCode): static
     {
         $this->shopCode = $shopCode;
-        return $this;
-    }
-
-    /**设置SM4加密类型
-     * @return ContainerBase
-     */
-    public function setEncryptionTypeSM4(string $encryptionTypeSM4): static
-    {
-        $this->encryptionTypeSM4 = $encryptionTypeSM4;
-        return $this;
-    }
-
-
-    /**设置请求域名
-     * @return ContainerBase
-     */
-    public function setHost(string $host): static
-    {
-        $this->host = $host;
-        return $this;
-    }
-
-    /**设置请求url
-     * @return ContainerBase
-     */
-    public function setUrl(string $url): static
-    {
-        $this->$url = $url;
         return $this;
     }
 

@@ -33,7 +33,6 @@ abstract class BaseClient
     /**
      * BaseClient constructor.
      * @param Container $app
-     * @param string $service
      */
     public function __construct(Container $app)
     {
@@ -52,10 +51,9 @@ abstract class BaseClient
 
     /**
      * curl 请求
-     * @param array $data
+     * @param array $param
      * @param string $method
      * @return array
-     * @throws GuzzleException
      */
     public function curlRequest(array $param, string $method = 'get'): array
     {
@@ -64,12 +62,15 @@ abstract class BaseClient
             $data['data'] = $param;
             ## 合并公共参数
             $data = array_merge($data, $this->app->baseParams);
-            //请求头参数
-            $reqData = $this->getReqData($data, 'SM4');
-            $sign = $this->getSign($reqData, $data['head']['timestamp'], 'SM3');
+            // sm4加密，返回base64
+            $signature = $this->encryptionSM4(json_encode($data));
+            // sm3加密
+            $sign = $this->encryptionSM3($data['head']['timestamp'] . $signature . $this->app->secretSM3);
+            // sm4 二次加密
+            $this->encryptionSM3($sign);
             $headers = [
                 'mrchCode' => $this->app->mrchCode,
-                'reqData' => $reqData,
+                'reqData' => $signature,
                 'sign' => $sign
             ];
             ## 开始请求

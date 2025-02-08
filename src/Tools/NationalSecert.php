@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ConstructPay\Api\Tools;
 
-use Hyperf\Codec\Json;
 use OneSm\Sm4;
 
 trait NationalSecert
