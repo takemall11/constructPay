@@ -11,6 +11,7 @@ use ConstructPay\Api\Constants\ConstructErrorCode;
 use ConstructPay\Api\Exception\PayException;
 use ConstructPay\Api\Tools\Guzzle;
 use ConstructPay\Api\Tools\Sign;
+use Hyperf\Codec\Json;
 use phpseclib3\Crypt\Hash;
 use SM3\Sm3;
 use function Hyperf\Support\make;
@@ -55,6 +56,7 @@ abstract class BaseClient
      * @param array $param
      * @param string $method
      * @return array
+     * @throws PayException
      */
     public function curlRequest(array $param, string $method = 'get'): array
     {
@@ -63,27 +65,24 @@ abstract class BaseClient
             $data['data'] = $param;
             ## 合并公共参数
             $data = array_merge($data, $this->app->baseParams);
-            $signatures=json_encode($data);
-           // $signatures="9988";
+            $signatures=Json::encode($data, JSON_UNESCAPED_SLASHES);
             // sm4加密，返回base64
             $signature = $this->encryptionSM4($signatures);
            // sm3加密
-           $sign = $this->encryptionSM3($this->app->secretSM3.$this->app->baseParams['head']['timestamp'].$signatures);
-          // $sign = $this->encryptionSM3($this->app->secretSM3.$signatures);
-            $headers = [
-                'mrchCode' => $this->app->mrchCode,
-                'reqData' => $signature,
-                'sign' => $sign
-            ];
+           $sign = $this->encryptionSM3($this->app->secretSM3.$this->app->baseParams['head']['timestamp'].$signature);
             ## 开始请求
-            $client = $this->getInstance($headers);
+            $client = $this->getInstance([]);
             ## 发送请求
             $method = 'send' . ucfirst($method);
             ## 获取返回结果
-            return $client->$method($this->app->url, ['reqData' => $data]);
+            return $client->$method($this->app->url, [
+                'mrchCode' => $this->app->mrchCode,
+                'reqData' => $signature,
+                'sign' => $sign
+            ]);
         } catch (RequestException|ClientException $e) {
             // 请求失败
-            logger('unionpay')->error('ConstructPay Request Error', [
+            logger('constructpay')->error('ConstructPay Request Error', [
                 'url' => $this->app->host . $this->app->url,
                 'data' => $data,
                 'error' => $e->getMessage(),
@@ -106,7 +105,6 @@ abstract class BaseClient
             'verify' => false,
             'headers' => $headers,
         ];
-        //   var_dump($params);exit;
         ## 开始请求
         /** @var Guzzle $client */
         return make(Guzzle::class)->setHttpHandle($params);

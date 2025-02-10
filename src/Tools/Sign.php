@@ -39,9 +39,8 @@ trait Sign
 
     /** 解密 sm4
      * @param string $signature
-     * * @param string $secret 秘钥
-     * * @param string $type 加密类型 ctr | ofb| cfb |cbc| Ecb
-     * @throws \Exception
+     * @param string $type 加密类型 ctr | ofb| cfb |cbc| Ecb
+     * @return mixed
      */
     private function decryptSM4(string $signature, string $type = 'ecb'): mixed
     {

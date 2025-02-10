@@ -18,8 +18,6 @@ class MiniPayShortcut extends BaseClient
     protected function setParams(): void
     {
         $this->app->baseParams['head']['bizCode'] = "A0001";
-        //        $this->app->baseParams['data']['mrchCode'] = $this->app->mrchCode;
-        //        $this->app->baseParams['data']['shopCode'] =  $this->app->shopCode;
     }
 
     /**

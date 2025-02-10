@@ -55,7 +55,7 @@ class Guzzle
      */
     public function sendPost(string $url, array $params): array
     {
-        logger('unionpay')->info('ConstructPay POST', ['url' => $url, 'params' => $params]);
+        logger('constructpay')->info('ConstructPay POST', ['url' => $url, 'params' => $params]);
 
         $result = $this->client->post($url, ['json' => $params]);
 
@@ -70,7 +70,7 @@ class Guzzle
     {
         $result = $response->getBody()->getContents();
 
-        logger('unionpay')->info('ConstructPay RESULT', Json::decode($result));
+        logger('constructpay')->info('ConstructPay RESULT', Json::decode($result));
 
         $result = Json::decode($result);
 
