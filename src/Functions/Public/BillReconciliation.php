@@ -16,7 +16,6 @@ class BillReconciliation extends BaseClient
 {
     protected function setParams(): void
     {
-        // ......
         $this->app->baseParams['head']['bizCode'] = "A0007";
     }
 

@@ -12,6 +12,7 @@ use ConstructPay\Api\Functions\Public\OrderPaymentResult;
 use ConstructPay\Api\Functions\Public\OrderRefund;
 use ConstructPay\Api\Functions\Public\JumpBankAppSignature;
 use ConstructPay\Api\Functions\Public\SubsidyBalance;
+use ConstructPay\Api\Functions\Public\SubsidyProductPush;
 use ConstructPay\Api\Interfaces\Provider;
 
 /**
@@ -46,6 +47,9 @@ class SearchProvider implements Provider
         };
         $container['jumpThirdAppSignature'] = function ($container) {
             return new JumpThirdAppSignature($container);
+        };
+        $container['subsidyProductPush'] = function ($container) {
+            return new SubsidyProductPush($container);
         };
     }
 }
