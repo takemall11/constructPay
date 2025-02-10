@@ -15,7 +15,6 @@ class SubsidyProductPush extends BaseClient
     protected function setParams(): void
     {
         $this->app->baseParams['head']['bizCode'] = "A2002";
-        $this->app->baseParams['data']['shopCode'] = $this->app->shopCode;
     }
 
     /**
