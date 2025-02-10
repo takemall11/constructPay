@@ -11,7 +11,8 @@ use ConstructPay\Api\Constants\ConstructErrorCode;
 use ConstructPay\Api\Exception\PayException;
 use ConstructPay\Api\Tools\Guzzle;
 use ConstructPay\Api\Tools\Sign;
-
+use phpseclib3\Crypt\Hash;
+use SM3\Sm3;
 use function Hyperf\Support\make;
 use function Hyperf\Config\config;
 
@@ -62,12 +63,13 @@ abstract class BaseClient
             $data['data'] = $param;
             ## 合并公共参数
             $data = array_merge($data, $this->app->baseParams);
+            $signatures=json_encode($data);
+           // $signatures="9988";
             // sm4加密，返回base64
-            $signature = $this->encryptionSM4(json_encode($data));
-            // sm3加密
-            $sign = $this->encryptionSM3($data['head']['timestamp'] . $signature . $this->app->secretSM3);
-            // sm4 二次加密
-            $this->encryptionSM3($sign);
+            $signature = $this->encryptionSM4($signatures);
+           // sm3加密
+           $sign = $this->encryptionSM3($this->app->secretSM3.$this->app->baseParams['head']['timestamp'].$signatures);
+          // $sign = $this->encryptionSM3($this->app->secretSM3.$signatures);
             $headers = [
                 'mrchCode' => $this->app->mrchCode,
                 'reqData' => $signature,
@@ -109,5 +111,6 @@ abstract class BaseClient
         /** @var Guzzle $client */
         return make(Guzzle::class)->setHttpHandle($params);
     }
+
 
 }

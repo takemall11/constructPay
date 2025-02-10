@@ -32,7 +32,6 @@ class Guzzle
         $options['handler'] = HandlerStack::create(new CoroutineHandler());
 
         $options['headers'] = array_merge($this->headers, $options['headers']);
-
         $this->client = new Client($options);
 
         return $this;

@@ -27,25 +27,25 @@ class SearchProvider implements Provider
     public function serviceProvider(Container $container): void
     {
         $container['search'] = function ($container) {
-            return new OrderDetail($container, '/ccb_equity_api_new/gateway/bizProcessApi');
+            return new OrderDetail($container);
         };
         $container['refund'] = function ($container) {
-            return new OrderRefund($container, '/ccb_equity_api_new/gateway/bizProcessApi');
+            return new OrderRefund($container);
         };
         $container['paymentResult'] = function ($container) {
-            return new OrderPaymentResult($container, '/ccb_equity_api_new/gateway/bizProcessApi');
+            return new OrderPaymentResult($container);
         };
         $container['subsidyBalance'] = function ($container) {
-            return new SubsidyBalance($container, '/ccb_equity_api_new/gateway/bizProcessApi');
+            return new SubsidyBalance($container);
         };
         $container['billReconciliation'] = function ($container) {
-            return new BillReconciliation($container, '/ccb_equity_api_new/gateway/bizProcessApi');
+            return new BillReconciliation($container);
         };
         $container['jumpBankAppSignature'] = function ($container) {
-            return new JumpBankAppSignature($container, '/ccb_equity_api_new/gateway/bizProcessApi');
+            return new JumpBankAppSignature($container);
         };
         $container['jumpThirdAppSignature'] = function ($container) {
-            return new JumpThirdAppSignature($container, '/ccb_equity_api_new/gateway/bizProcessApi');
+            return new JumpThirdAppSignature($container);
         };
     }
 }

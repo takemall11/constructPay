@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ConstructPay\Api\Tools;
 
-use OneSm\Sm4;
+use Evit\PhpGmCrypto\Encryption\EvitSM3Encryption;
+use Evit\PhpGmCrypto\Encryption\EvitSM4Encryption;
 
 trait Sign
 {
@@ -15,8 +16,8 @@ trait Sign
      */
     private function encryptionSM3(string $signature)
     {
-        $sm3 = new \OneSm\Sm3();
-        return $sm3->sign($signature);
+        $sm3 = new EvitSM3Encryption();
+        return $sm3->sm3($signature);
     }
 
     /**
@@ -28,16 +29,12 @@ trait Sign
      */
     private function encryptionSM4(string $signature, string $type = 'ecb'): string
     {
-        $sm4 = new Sm4($this->app->secretSM4);
-        $type = ucfirst($type);
-        $method = 'enData' . $type;
-        if ($type == 'Ecb') {
-            $signature = $sm4->$method($signature);
-        } else {
-            $signature = $sm4->$method($signature, $this->app->secretSM4);
-        }
-        return base64_encode($signature);
 
+        $config['key'] = $this->app->secretSM4;
+        $config['mode'] = $type;
+        $sm4 = new EvitSM4Encryption($config);
+        $signature = $sm4->encrypt($signature);
+        return base64_encode($signature);
     }
 
     /** 解密 sm4
@@ -46,17 +43,13 @@ trait Sign
      * * @param string $type 加密类型 ctr | ofb| cfb |cbc| Ecb
      * @throws \Exception
      */
-    private function decryptSM4(string $signature, string $secret, string $type = 'ecb'): mixed
+    private function decryptSM4(string $signature, string $type = 'ecb'): mixed
     {
-        $sm4 = new Sm4($secret);
-        $type = ucfirst($type);
-        $method = 'deData' . $type;
-        if ($type == 'Ecb') {
-            $signature = $sm4->$method($signature);
-        } else {
-            $signature = $sm4->$method($signature, $secret);
-        }
-        return $signature;
+        // 解密
+        $config['key'] = $this->app->secretSM4;
+        $config['mode'] = $type;
+        $sm4 = new EvitSM4Encryption($config);
+        return $signature = $sm4->decrypt(base64_decode($signature));
     }
 
 }
