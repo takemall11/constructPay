@@ -29,9 +29,6 @@ abstract class BaseClient
     // 基础参数
     protected Container $app;
 
-    // 请求路径
-    public string $url = '';
-
     /**
      * BaseClient constructor.
      * @param Container $app
