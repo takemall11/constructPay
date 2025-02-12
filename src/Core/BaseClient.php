@@ -38,8 +38,6 @@ abstract class BaseClient
         $this->app = $app;
         //设置时区
         date_default_timezone_set('Asia/Shanghai');
-        // 设置公共参数
-        $this->app->baseParams['head']['timestamp'] =  date('YmdHis', time());
     }
 
     /**
@@ -59,6 +57,8 @@ abstract class BaseClient
     {
         try {
             $this->setParams();
+            // 设置公共参数
+            $this->app->baseParams['head']['timestamp'] =  date('YmdHis', time());
             $data['data'] = $param;
             ## 合并公共参数
             $data = array_merge($data, $this->app->baseParams);
