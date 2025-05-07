@@ -138,4 +138,14 @@ class ContainerBase extends Container
         return $this;
     }
 
+    /**
+     * @param string $host
+     * @return $this
+     */
+    public function setHost(string $host): static
+    {
+        $this->host = $host;
+        return $this;
+    }
+
 }
