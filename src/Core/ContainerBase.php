@@ -44,7 +44,7 @@ class ContainerBase extends Container
     public string $encryptionTypeSM4 = 'ecb';
 
     // 请求地址
-    public string $host = 'https://aty.huamaihome.com';
+    public string $host = 'https://jsyxfw.ccb.com';
     //请求路由
     public string $url = '/ccb_equity_api_new/gateway/bizProcessApi';
 
